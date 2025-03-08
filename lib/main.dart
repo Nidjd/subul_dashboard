@@ -12,6 +12,7 @@ class SubulDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
       theme: ThemeData(fontFamily: AssetsData.almarai),
     );
