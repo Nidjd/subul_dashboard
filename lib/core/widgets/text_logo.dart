@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:subul_dashboard/core/utils/app_colors.dart';
+
+class TextLogo extends StatelessWidget {
+  const TextLogo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Text(
+        "S U B U L",
+        style: TextStyle(
+          fontSize: 64,
+          fontWeight: FontWeight.bold,
+          foreground:
+              Paint()
+                ..shader = LinearGradient(
+                  colors: [
+                    AppColors.richPurple,
+                    AppColors.goldenYellow,
+                    AppColors.vibrantOrange,
+                    AppColors.deepPurple,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 50.0)),
+        ),
+      ),
+    );
+  }
+}
