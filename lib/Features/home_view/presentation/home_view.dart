@@ -161,6 +161,21 @@ class _HomeViewState extends State<HomeView> {
                           child: Text('الشحنات', style: Styles.textStyle24),
                         ),
                       ),
+                      const SizedBox(height: 38.0),
+                      Container(
+                        width: 279,
+                        height: 71,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.goldenYellow,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'الشحنات الواردة',
+                            style: Styles.textStyle24,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
