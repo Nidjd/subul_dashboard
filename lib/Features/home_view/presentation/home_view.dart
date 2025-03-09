@@ -125,6 +125,18 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 38.0),
+                      Container(
+                        width: 279,
+                        height: 71,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.goldenYellow,
+                        ),
+                        child: Center(
+                          child: Text('حذف عميل', style: Styles.textStyle24),
+                        ),
+                      ),
                     ],
                   ),
                 ),
