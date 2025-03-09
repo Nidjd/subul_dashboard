@@ -9,6 +9,7 @@ class TextLogo extends StatelessWidget {
     return SizedBox(
       child: Text(
         "S U B U L",
+
         style: TextStyle(
           fontSize: 64,
           fontWeight: FontWeight.bold,
@@ -21,9 +22,10 @@ class TextLogo extends StatelessWidget {
                     AppColors.vibrantOrange,
                     AppColors.deepPurple,
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 50.0)),
+                  stops: [0.25, 0.5, 0.75, 1.0],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ).createShader(Rect.fromLTWH(0.0, 0.0, 350.0, 100.0)),
         ),
       ),
     );

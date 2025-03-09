@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subul_dashboard/core/utils/app_colors.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:subul_dashboard/core/widgets/text_logo.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,13 +9,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFD1CFE2), AppColors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(image: DecorationImage(image: SvgPicture.asset(assetName))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
