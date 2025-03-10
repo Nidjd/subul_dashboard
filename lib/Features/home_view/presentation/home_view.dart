@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:subul_dashboard/Features/home_view/presentation/widgets/background_widget.dart';
+import 'package:subul_dashboard/Features/home_view/presentation/widgets/button_state.dart';
+import 'package:subul_dashboard/Features/home_view/presentation/widgets/custom_button.dart';
+import 'package:subul_dashboard/Features/home_view/presentation/widgets/small_car_widget.dart';
+import 'package:subul_dashboard/Features/home_view/presentation/widgets/toggle_between_company_and_client.dart';
 import 'package:subul_dashboard/core/utils/app_colors.dart';
-import 'package:subul_dashboard/core/utils/assets.dart';
-import 'package:subul_dashboard/core/utils/styles.dart';
+
 import 'package:subul_dashboard/core/widgets/text_logo.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,15 +17,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool isSelected = false;
+  ButtonState selectedButton = ButtonState.company;
+  void updateButton(ButtonState newState) {
+    setState(() {
+      selectedButton = newState;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: ListView(
         children: [
           Stack(
             children: [
-              Center(child: SvgPicture.asset(AssetsData.background1)),
+              BackroundWidget(size: size),
               Padding(
                 padding: const EdgeInsets.only(left: 91, top: 51),
                 child: TextLogo(),
@@ -29,154 +40,90 @@ class _HomeViewState extends State<HomeView> {
               Padding(
                 padding: const EdgeInsets.only(left: 39, top: 148, bottom: 32),
                 child: Container(
-                  width: 365,
-                  height: 844,
+                  width: size.width * 0.3,
+                  height: size.height * 1.3,
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.deepPurple, width: 2),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 75,
-                          left: 38,
-                          right: 48,
-                        ),
-                        child: Container(
-                          width: 279,
-                          height: 71,
-                          decoration: BoxDecoration(
-                            color: AppColors.goldenYellow,
-                            borderRadius: BorderRadius.circular(20.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: size.width * 0.05,
+                            right: size.width * 0.05,
+                            top: size.height * 0.07,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isSelected = false;
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 8,
-                                    top: 5,
-                                    bottom: 5,
-                                  ),
-                                  child: Container(
-                                    width: 125,
-                                    height: 61,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          isSelected
-                                              ? AppColors.goldenYellow
-                                              : AppColors.deepPurple,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'شركة',
-
-                                        style: Styles.textStyle20.copyWith(
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                    ),
+                          child: Container(
+                            width:
+                                size.width * 0.3 > 200 ? size.width * 0.3 : 200,
+                            height:
+                                size.height * 0.1 > 50 ? size.height * 0.1 : 50,
+                            decoration: BoxDecoration(
+                              color: AppColors.goldenYellow,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: ToggleBetweenCompanyAndClient(
+                                    size: size,
+                                    selectedButton: selectedButton,
+                                    onTap:
+                                        () => updateButton(ButtonState.company),
+                                    text: 'شركة',
+                                    buttonState: ButtonState.company,
                                   ),
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isSelected = true;
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 5,
-                                    bottom: 5,
-                                    right: 8,
-                                  ),
-                                  child: Container(
-                                    width: 125,
-                                    height: 61,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          isSelected
-                                              ? AppColors.deepPurple
-                                              : AppColors.goldenYellow,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'عميل',
-
-                                        style: Styles.textStyle20.copyWith(
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                    ),
+                                Expanded(
+                                  child: ToggleBetweenCompanyAndClient(
+                                    size: size,
+                                    selectedButton: selectedButton,
+                                    onTap:
+                                        () => updateButton(ButtonState.client),
+                                    text: 'عميل',
+                                    buttonState: ButtonState.client,
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 38.0),
-                      Container(
-                        width: 279,
-                        height: 71,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.goldenYellow,
+                        SizedBox(height: size.height * 0.06),
+                        CustomButton(
+                          text: 'حذف عميل',
+                          onTap: () => updateButton(ButtonState.deleteWorker),
+                          buttonState: ButtonState.deleteWorker,
+                          selectedButton: selectedButton,
                         ),
-                        child: Center(
-                          child: Text('حذف عميل', style: Styles.textStyle24),
+                        SizedBox(height: size.height * 0.06),
+                        CustomButton(
+                          text: 'الغاء شحنة',
+                          onTap: () => updateButton(ButtonState.cancelShipment),
+                          buttonState: ButtonState.cancelShipment,
+                          selectedButton: selectedButton,
                         ),
-                      ),
-                      const SizedBox(height: 38.0),
-                      Container(
-                        width: 279,
-                        height: 71,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.goldenYellow,
+                        SizedBox(height: size.height * 0.06),
+                        CustomButton(
+                          text: 'الشحنات',
+                          onTap: () => updateButton(ButtonState.shipments),
+                          buttonState: ButtonState.shipments,
+                          selectedButton: selectedButton,
                         ),
-                        child: Center(
-                          child: Text('إلغاء شحنة', style: Styles.textStyle24),
+                        SizedBox(height: size.height * 0.06),
+                        CustomButton(
+                          text: 'الشحنات الواردة',
+                          onTap:
+                              () => updateButton(ButtonState.incomingShipments),
+                          buttonState: ButtonState.incomingShipments,
+                          selectedButton: selectedButton,
                         ),
-                      ),
-                      const SizedBox(height: 38.0),
-                      Container(
-                        width: 279,
-                        height: 71,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.goldenYellow,
-                        ),
-                        child: Center(
-                          child: Text('الشحنات', style: Styles.textStyle24),
-                        ),
-                      ),
-                      const SizedBox(height: 38.0),
-                      Container(
-                        width: 279,
-                        height: 71,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.goldenYellow,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'الشحنات الواردة',
-                            style: Styles.textStyle24,
-                          ),
-                        ),
-                      ),
-                    ],
+                        SizedBox(height: size.height * 0.2),
+                        SmallCarWidget(size: size),
+                      ],
+                    ),
                   ),
                 ),
               ),
